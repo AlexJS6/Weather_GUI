@@ -2,10 +2,12 @@ import tkinter as tk #tkinter doc: https://www.tutorialspoint.com/python/python_
 from tkinter import font
 import requests
 
+#pyinstaller: pyinstaller --onefile --icon=sun_icon.ico -w weather.py
 #pack() -> keywords: expand, fill, side
 #place() -> Best -> 
 #grid()
 
+root = tk.Tk() #tkinter needs a root window
 
 WIDTH = 675
 HEIGHT = 550
@@ -26,7 +28,7 @@ def format_response(weather):
     return final_str
 
 def get_weather(city):
-    weather_key = ''
+    weather_key = 'd6ae3d32da43faf44c1c70a3572dc583'
     url = 'https://api.openweathermap.org/data/2.5/weather'
     params = {'APPID': weather_key, 'q': city, 'units': 'metric'}
     response = requests.get(url, params = params)
@@ -35,7 +37,7 @@ def get_weather(city):
     label['text'] = format_response(weather)
 
 
-root = tk.Tk() #tkinter needs a root window
+
 
 canvas = tk.Canvas(root, height=HEIGHT, width = WIDTH)
 canvas.pack()
@@ -60,6 +62,5 @@ lower_frame.place(relx = 0.5, rely = 0.25, relwidth = 0.75, relheight = 0.6, anc
 label = tk.Label(lower_frame, font = ('Constantia', 20))
 label.place(relwidth = 1, relheight = 1)
 
-print(tk.font.families())
 
 root.mainloop() # everything runs betwwen root = tk.Tk() and root.mainloop()
