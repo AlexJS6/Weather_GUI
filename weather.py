@@ -5,8 +5,6 @@ import requests
 #place() -> Best -> 
 #grid()
 
-#key : d6ae3d32da43faf44c1c70a3572dc583
-#api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
 WIDTH = 675
 HEIGHT = 550
