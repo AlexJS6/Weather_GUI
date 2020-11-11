@@ -1,4 +1,5 @@
 import tkinter as tk #tkinter doc: https://www.tutorialspoint.com/python/python_gui_programming.htm
+import requests
 
 #pack() -> keywords: expand, fill, side
 #place() -> Best -> 
@@ -14,9 +15,14 @@ def test_function(entry):
     print('Button clicked!:' + entry)
 
 def get_weather(city):
-    weather_key = 'd6ae3d32da43faf44c1c70a3572dc583'
+    weather_key = ''
     url = 'https://api.openweathermap.org/data/2.5/weather'
-    params = {'APPID': weather_key, 'q': city, 'units': 'imperial'}
+    params = {'APPID': weather_key, 'q': city, 'units': 'celsius'}
+    response = requests.get(url, params = params)
+    weather = response.json()
+    print(weather['name'])
+    print(weather['weather'][0]['description'])
+    print(weather['main']['temp'])
 
 
 root = tk.Tk() #tkinter needs a root window
@@ -34,7 +40,7 @@ frame.place(relx = 0.5, rely = 0.1, relwidth = 0.75, relheight = 0.1, anchor = '
 entry = tk.Entry(frame,font = 40)
 entry.place(relwidth = 0.65, relheight = 1)
 
-button = tk.Button(frame, text="Get Weather", font = 40, command = lambda:  test_function(entry.get())) #its defined at the time it is run
+button = tk.Button(frame, text="Get Weather", font = 40, command = lambda:  get_weather(entry.get())) #its defined at the time it is run
 button.place(relx = 0.7, relheight = 1, relwidth = 0.3)
 
 
